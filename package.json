@@ -1,0 +1,40 @@
+{
+  "name": "@fayz/walters-coiffeur",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Walter's Coiffeur — isolated staging site",
+  "scripts": {
+    "dev": "node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 3014 --strictPort",
+    "typecheck": "node scripts/check.mjs typecheck",
+    "build": "node scripts/check.mjs build",
+    "preview": "node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4314"
+  },
+  "dependencies": {
+    "@fayz-ai/plugin-agenda": "0.18.4",
+    "@fayz-ai/sdk": "0.19.1",
+    "@fayz-ai/shop": "0.33.0",
+    "@fayz-ai/storefront": "0.33.0",
+    "@fayz-ai/ui": "0.25.0",
+    "gsap": "3.15.0",
+    "lucide-react": "^0.400.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "7.18.4"
+  },
+  "devDependencies": {
+    "@playwright/mcp": "^0.0.83",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^6.0.4",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.8.3",
+    "vite": "^8.1.5"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

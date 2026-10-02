@@ -1,6 +1,6 @@
 # Walter’s — Produtos no header e primeiro envio ao repositório (02/10/2026)
 
-Estado: header e menu implementados e verificados localmente; primeiro push pendente.
+Estado: header e menu implementados e verificados localmente; site enviado ao repositório indicado.
 
 ## Fingerprint e autoridade
 
@@ -15,7 +15,7 @@ Estado: header e menu implementados e verificados localmente; primeiro push pend
 | --- | --- | --- | --- | --- | --- |
 | Header desktop | Pedido atual: acesso direto a Produtos | Logo, demais links, CTA Agendar, cores, altura e menu responsivo | Adicionar `/produtos/` a `primary`; React Router `Link` e `aria-current` existentes | Desktop e tablet: link visível, rota correta, sem colisão | Verified |
 | Menu completo | Produtos já está em `secondary`; não duplicar | Todas as rotas e interações de abrir/fechar | Mover entrada para `primary`, remover de `secondary`; rolagem continua disponível | Desktop, mobile portrait e compact landscape; contagem de links e navegação | Verified |
-| Repositório | URL explicitamente autorizada | Fontes, mídias da amostra, SDK via dependências, documentação e skills; nada de segredo, build ou screenshots de QA | Git local novo, branch principal, remote `origin` exato; `.gitignore` para saídas geradas | Inventário de arquivos, build/typecheck, commit, push, `ls-remote` | Implemented locally; push pending |
+| Repositório | URL explicitamente autorizada | Fontes, mídias da amostra, SDK via dependências, documentação e skills; nada de segredo, build ou screenshots de QA | Git local novo, branch principal, remote `origin` exato; `.gitignore` para saídas geradas | Inventário de arquivos, build/typecheck, commit, push, `ls-remote` | Verified |
 
 Envelope: `required` novo link e envio do site; `allowed` organização dos links, `.gitignore`, README e registro de implementação; `frozen` aparência das páginas, rotas existentes, conteúdo/precificação demonstrativos, agendamento e dependências. No-loss: Home, serviços, unidades, institucional, franquias, Academy, Barbearia, Concept, catálogo, oito detalhes, CTA flutuante, painel, logo e versões responsivas. O projeto é uma amostra `noindex`; GitHub não deve ser confundido com deploy.
 
@@ -31,3 +31,4 @@ Envelope: `required` novo link e envio do site; `allowed` organização dos link
 - `node scripts/check.mjs typecheck` e `node scripts/check.mjs build` passaram. O aviso de chunk acima de 500 kB é anterior a esta mudança.
 - O primeiro screenshot do menu foi capturado antes do fim da transição; classificação: defeito do teste, não do site. O script passou a aguardar 600 ms e a captura mostra o link acessível e a lista sem duplicação.
 - Para o commit inicial, `.gitignore` exclui `node_modules/`, `dist/`, `output/`, `.env*` e `.codex/` (configuração local com caminho de máquina). `git add -n .` mostrou fontes, skills, documentação, imagens da amostra, package/lock e scripts, sem os diretórios excluídos. O envio ao GitHub continua separado da liberação para deploy.
+- O repositório remoto estava sem refs imediatamente antes do envio. O commit inicial `7ed1cca` foi enviado para `origin/main` com sucesso em 02/10/2026. Este registro não altera o status de prévia: o site não foi implantado nem liberado comercialmente.

@@ -2,6 +2,7 @@ node_modules/
 dist/
 output/
 .codex/
+.fayz/
 .env
 .env.*
 !.env.example

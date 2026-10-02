@@ -1,5 +1,4 @@
 import { fileURLToPath, URL } from 'node:url'
-import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { fayzVite } from '@fayz-ai/sdk/vite'
@@ -18,17 +17,17 @@ const reviewAssetRoot = resolve(import.meta.dirname, '../walters-design-system/p
 export default defineConfig(fayzVite({
   port: 3014,
   strictPort: true,
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
   plugins: [react(), {
     name: 'walters-local-review-assets',
     apply: 'serve',
     configureServer(server) {
       server.middlewares.use('/__review-assets', (request, response, next) => {
-        const name = decodeURIComponent((request.url ?? '').split('?')[0],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-  }.replace(/^\//, ''))
+        const name = decodeURIComponent((request.url ?? '').split('?')[0].replace(/^\//, ''))
         if (!reviewAssets.has(name)) { next(); return }
         response.setHeader('Content-Type', name.endsWith('.png') ? 'image/png' : 'image/jpeg')
         response.setHeader('Cache-Control', 'no-store')

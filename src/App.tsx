@@ -3,13 +3,14 @@ import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import HomePage from './HomePage'
 import SiteFooter from './SiteFooter'
 import BrandLogo from './BrandLogo'
 import BookingPanel from './BookingPanel'
 import CommercePage from './CommercePage'
 import CommerceProductDetailPage from './CommerceProductDetailPage'
-import { AboutPage, AcademyPage, BarbershopPage, ConceptPage, FranchisePage, ServicesPage, UnitsPage } from './SitePages'
+import { AboutPage, AcademyPage, BarbershopPage, ConceptPage, FranchisePage, ServicesPage, UnitsPage } from './EditorialPages'
 import './chrome.css'
 
 const primary = [
@@ -35,7 +36,7 @@ const routeTitles: Record<string, string> = {
 }
 
 function UnknownRoute() {
-  return <section className="site-not-found"><div className="site-width"><span className="site-kicker">Página não encontrada</span><h1>Este caminho não está por aqui.</h1><Link to="/">Voltar ao início <ArrowUpRight size={18} aria-hidden="true" /></Link></div></section>
+  return <section className="site-not-found"><div className="ep-width"><span className="ep-eyebrow">Página não encontrada</span><h1>Este caminho não está por aqui.</h1><Link to="/">Voltar ao início <ArrowUpRight size={18} aria-hidden="true" /></Link></div></section>
 }
 
 export default function App() {
@@ -74,10 +75,10 @@ export default function App() {
 
   useLayoutEffect(() => {
     if (isHome || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const scope = document.querySelector<HTMLElement>('.site-page')
+    const scope = document.querySelector<HTMLElement>('.ep-page')
     if (!scope) return
     const context = gsap.context(() => {
-      scope.querySelectorAll<HTMLElement>('h1,h2,.site-kicker,.site-page-lead p,.site-units-lead p,.site-franchise-lead p').forEach(element => {
+      scope.querySelectorAll<HTMLElement>('h1,h2,.ep-eyebrow,.ep-hero p,.ep-intro p,.ep-story p').forEach(element => {
         if (element.getBoundingClientRect().bottom < 0) return
         gsap.from(element, { opacity: 0, y: 22, filter: 'blur(5px)', duration: .85, ease: 'power2.out', scrollTrigger: { trigger: element, start: 'top 93%', once: true } })
       })
@@ -87,8 +88,16 @@ export default function App() {
         gsap.fromTo(element, { clipPath: from }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.25, ease: 'power2.inOut', scrollTrigger: { trigger: element, start: 'top 88%', once: true } })
       })
     }, scope)
+    const mm = gsap.matchMedia()
+    mm.add('(min-width: 1024px) and (min-height: 620px) and (prefers-reduced-motion: no-preference)', () => {
+      const mediaContext = gsap.context(() => {
+        const hero = scope.querySelector<HTMLElement>('.ep-hero-media img')
+        if (hero) gsap.fromTo(hero, { yPercent: -3, scale: 1.12 }, { yPercent: 3, scale: 1.12, ease: 'none', scrollTrigger: { trigger: scope.querySelector('.ep-hero'), start: 'top top', end: 'bottom top', scrub: .7 } })
+      }, scope)
+      return () => mediaContext.revert()
+    })
     requestAnimationFrame(() => ScrollTrigger.refresh())
-    return () => context.revert()
+    return () => { mm.revert(); context.revert() }
   }, [location.pathname, isHome])
 
   useEffect(() => {
@@ -113,6 +122,19 @@ export default function App() {
     window.addEventListener('keydown', onEscape)
     return () => window.removeEventListener('keydown', onEscape)
   }, [menuOpen])
+
+  useEffect(() => {
+    if (!menuOpen || bookingOpen) return
+    const previousOverflow = document.body.style.overflow
+    const smoother = ScrollSmoother.get()
+    const smootherWasPaused = smoother?.paused() ?? false
+    smoother?.paused(true)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+      smoother?.paused(smootherWasPaused)
+    }
+  }, [menuOpen, bookingOpen])
 
   const dismissFloating = () => {
     setFloatingDismissed(true)

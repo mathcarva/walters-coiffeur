@@ -21,7 +21,7 @@ export default function CommercePage() {
     const filtered = catalog.products.filter(product =>
       (!categoryId || product.categoryId === categoryId) &&
       product.price >= priceMin && product.price <= priceMax &&
-      `${product.name} ${product.categoryName}`.toLocaleLowerCase('pt-BR').includes(query.trim().toLocaleLowerCase('pt-BR')),
+      `${product.name} ${product.categoryName} ${product.description}`.toLocaleLowerCase('pt-BR').includes(query.trim().toLocaleLowerCase('pt-BR')),
     )
     if (sort === 'price-asc') return filtered.sort((a, b) => a.price - b.price)
     if (sort === 'price-desc') return filtered.sort((a, b) => b.price - a.price)
@@ -58,13 +58,13 @@ export default function CommercePage() {
         <div className="commerce-shop-main">
           <div className="commerce-shop-toolbar"><label className="commerce-search"><Search size={18} aria-hidden="true" /><span className="sr-only">Pesquisar produtos</span><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Pesquisar produtos" /></label><label className="commerce-sort">Ordenar por <select value={sort} onChange={event => setSort(event.target.value as SortOrder)}><option value="featured">Destaques</option><option value="price-asc">Menor preço</option><option value="price-desc">Maior preço</option><option value="name">Nome A–Z</option></select></label></div>
           <div className="commerce-result-meta" role="status"><span>{results.length} {results.length === 1 ? 'produto' : 'produtos'} nesta seleção</span><span>Imagens e preços ilustrativos</span></div>
-          {catalog.loading || categories.loading ? <p role="status" className="commerce-state">Carregando o catálogo…</p> : catalog.error ? <p role="alert" className="commerce-state">Não foi possível carregar a amostra.</p> : results.length ? <div className="commerce-product-grid" aria-live="polite">{results.map(product => <article className="commerce-product-card" key={product.id}><Link className="commerce-product-card-link" to={`/produtos/${product.slug}/`} aria-label={`Ver detalhes de ${product.name}`}>
-            <div className="commerce-product-media"><img src={product.images[0]?.url} alt={product.images[0]?.altText ?? `Embalagem conceitual de ${product.name}`} width="1000" height="1000" loading="lazy" /><span>{product.metadata.origin === 'concept' ? 'Conceito' : 'Nome do acervo'}</span></div>
+          {catalog.loading || categories.loading ? <p role="status" className="commerce-state">Carregando o catálogo…</p> : catalog.error ? <p role="alert" className="commerce-state">Não foi possível carregar a amostra.</p> : results.length ? <div className="commerce-product-grid" aria-live="polite">{results.map(product => <article className="commerce-product-card" key={product.id}><Link className="commerce-product-card-link" to={`/produtos/${product.slug}/`} aria-label={`Ver detalhes de ${product.name} · ${product.categoryName}`}>
+            <div className="commerce-product-media"><img src={product.images[0]?.url} alt={product.images[0]?.altText ?? `Recriação da embalagem de ${product.name}`} width="1000" height="1000" loading="lazy" /><span>Produto do acervo</span></div>
             <div className="commerce-product-info"><span className="commerce-product-line">{product.categoryName} · {String(product.metadata.volume ?? '')}</span><h3>{product.name}</h3><div className="commerce-product-price"><span>Preço ilustrativo</span><strong>{currency.format(product.price)}</strong></div></div>
           </Link></article>)}</div> : <div className="commerce-empty" role="status"><p>Nenhum produto corresponde aos filtros.</p><button type="button" className="commerce-text-link" onClick={resetFilters}>Limpar filtros <ArrowUpRight size={18} aria-hidden="true" /></button></div>}
         </div>
       </div>
-      <p className="commerce-catalog-disclosure">Esta página é uma amostra visual, não uma loja. Cinco nomes vêm de materiais de 2020; três itens são conceitos novos. Imagens, embalagens e valores são ilustrativos. Confirme catálogo e disponibilidade com a marca.</p>
+      <p className="commerce-catalog-disclosure">Esta página é uma amostra visual, não uma loja. Os nove nomes e tamanhos foram identificados em materiais da Walter’s; as imagens recriam as embalagens registradas, mas não são fotografias oficiais atuais. Valores ilustrativos. Confirme catálogo e disponibilidade com a marca.</p>
     </div></section>
   </div>
 }

@@ -8,14 +8,17 @@
     "dev": "node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 3014 --strictPort",
     "typecheck": "node scripts/check.mjs typecheck",
     "build": "node scripts/check.mjs build",
+    "qa:internal": "node scripts/qa-internal.mjs",
     "preview": "node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4314"
   },
   "dependencies": {
     "@fayz-ai/plugin-agenda": "0.18.4",
+    "@fayz-ai/plugin-crm": "0.31.1",
     "@fayz-ai/sdk": "0.19.1",
     "@fayz-ai/shop": "0.33.0",
     "@fayz-ai/storefront": "0.33.0",
     "@fayz-ai/ui": "0.25.0",
+    "@supabase/supabase-js": "2.117.2",
     "gsap": "3.15.0",
     "lucide-react": "^0.400.0",
     "react": "^18.3.1",

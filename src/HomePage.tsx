@@ -9,13 +9,6 @@ import './home.css'
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
-// Internal pages still use research assets. Keep their explicit non-publishable fallback.
-const previewAsset = (file: string) => import.meta.env.DEV ? `/__review-assets/${file}` : undefined
-export function ReviewImage({ file, alt, className = '', style }: { file: string; alt: string; className?: string; style?: React.CSSProperties }) {
-  const source = previewAsset(file)
-  return source ? <img src={source} alt={alt} className={className} style={style} /> : <div className={`review-media-gap ${className}`} role="img" aria-label={`Mídia pendente: ${alt}`}>Mídia pendente de liberação</div>
-}
-
 const media = '/editorial-2026/'
 function EditorialLink({ to, children }: { to: string; children: ReactNode }) {
   return <Link className="wh-link" to={to}>{children}<ArrowUpRight size={19} aria-hidden="true" /></Link>
@@ -41,7 +34,7 @@ function Encontro() {
 }
 
 const careItems = [
-  { name: 'Corte', image: 'service-corte-v2.jpg', alt: 'Retrato editorial de cabelo cacheado sendo finalizado com tesoura', detail: 'Forma, movimento e um corte pensado para acompanhar você.' },
+  { name: 'Corte', image: 'service-corte-v3.png', alt: 'Retrato editorial de mulher com cabelo curto e liso durante o corte', detail: 'Forma, movimento e um corte pensado para acompanhar você.' },
   { name: 'Mechas & Coloração', image: 'service-color-v2.jpg', alt: 'Retrato editorial de cabelo com mechas iluminadas', detail: 'Luz e cor para revelar novas nuances do seu cabelo.' },
   { name: 'Tratamentos Capilares', image: 'service-treatment-v2.jpg', alt: 'Cuidado capilar em lavatório, com foco no cabelo e no rosto', detail: 'Um momento de atenção à fibra, ao couro cabeludo e ao seu bem-estar.' },
   { name: 'Makeup', image: 'service-makeup-v2.jpg', alt: 'Maquiagem editorial com foco no olhar e no rosto', detail: 'A maquiagem como expressão, não como regra.' },
@@ -75,7 +68,7 @@ function Universos() {
 }
 
 function Produtos() {
-  return <section className="wh-produtos" aria-labelledby="wh-produtos-title"><div className="wh-container wh-produtos-intro" data-enter><span className="wh-eyebrow">O ritual continua</span><h2 id="wh-produtos-title">Leve o cuidado <em>para além do salão.</em></h2><p>Textura, gesto, memória. Uma apresentação conceitual de produtos Walter’s para imaginar como o ritual pode continuar em casa.</p></div><div className="wh-produtos-scene"><figure className="wh-produtos-main wh-image-reveal"><img src={`${media}products-professional-v2.jpg`} alt="Imagem conceitual de produtos capilares Walter’s em cenário editorial" loading="lazy" /></figure><div className="wh-produtos-overlay" data-enter><span className="wh-eyebrow">Walter’s / em casa</span><p>O que fica depois <em>do encontro.</em></p><EditorialLink to="/produtos/">Ver todos os produtos</EditorialLink></div><figure className="wh-produtos-detail wh-image-reveal"><img src={`${media}products-barber-v2.jpg`} alt="Imagem conceitual de produto de barbearia Walter’s em cenário editorial" loading="lazy" /></figure></div></section>
+  return <section className="wh-produtos" aria-labelledby="wh-produtos-title"><div className="wh-container wh-produtos-intro" data-enter><span className="wh-eyebrow">O ritual continua</span><h2 id="wh-produtos-title">Leve o cuidado <em>para além do salão.</em></h2><p>Do Brilho Extraordinário aos cuidados da Barbearia: produtos registrados no acervo Walter’s, reunidos nesta prévia visual.</p></div><div className="wh-produtos-scene"><figure className="wh-produtos-main wh-image-reveal"><img src={`${media}products-professional-archive-v3.jpg`} alt="Recriação editorial do Shampoo e Condicionador Premium Brilho Extraordinário Walter’s Professional em pedra e tecido bordô" loading="lazy" /></figure><div className="wh-produtos-overlay" data-enter><span className="wh-eyebrow">Walter’s / em casa</span><p>O que fica depois <em>do encontro.</em></p><EditorialLink to="/produtos/">Ver todos os produtos</EditorialLink></div><figure className="wh-produtos-detail wh-image-reveal"><img src={`${media}products-barber-archive-v3.jpg`} alt="Recriação editorial da Cera Modeladora Barbearia Walter’s sobre bancada de pedra" loading="lazy" /></figure></div></section>
 }
 
 function Encontrar({ onOpenBooking }: { onOpenBooking: () => void }) {

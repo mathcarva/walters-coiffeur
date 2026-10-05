@@ -98,12 +98,12 @@
 .wh-produtos-intro p { grid-column:2; max-width:520px; margin:28px 0 0; color:#5d5550; font:400 16px/1.65 Arial,Helvetica,sans-serif; }
 .wh-produtos-scene { position:relative; min-height:clamp(760px,65vw,1080px); overflow:hidden; background:#3c3028; color:#fff8f1; }
 .wh-produtos-main { position:absolute; inset:0; margin:0; }
-.wh-produtos-main img { display:block; width:100%; height:100%; object-fit:cover; object-position:center; }
+.wh-produtos-main img { display:block; width:100%; height:100%; object-fit:cover; object-position:center 20%; }
 .wh-produtos-scene::after { position:absolute; inset:0; background:linear-gradient(270deg,#1b1512cf,transparent 53%); content:""; pointer-events:none; }
 .wh-produtos-overlay { position:absolute; z-index:1; top:6%; right:max(clamp(20px,4vw,56px),calc((100vw - 1380px)/2)); width:min(35vw,500px); }
 .wh-produtos-overlay p { max-width:500px; margin:22px 0 24px; font:400 clamp(52px,5vw,78px)/.97 Georgia,'Times New Roman',serif; letter-spacing:-.066em; }
 .wh-produtos-overlay p em { color:#f0d8c4; }
-.wh-produtos-detail { position:absolute; z-index:1; right:max(clamp(20px,4vw,56px),calc((100vw - 1380px)/2)); bottom:clamp(44px,4vw,64px); width:min(28vw,380px); height:min(37vw,490px); margin:0; border:12px solid #f7f4ef; overflow:hidden; box-shadow:0 30px 70px #100909a8,0 8px 22px #10090980; will-change:transform; }
+.wh-produtos-detail { position:absolute; z-index:1; right:max(clamp(20px,4vw,56px),calc((100vw - 1380px)/2)); bottom:clamp(44px,4vw,64px); width:min(28vw,380px); aspect-ratio:1; margin:0; border:12px solid #f7f4ef; overflow:hidden; box-shadow:0 30px 70px #100909a8,0 8px 22px #10090980; will-change:transform; }
 .wh-produtos-detail img { display:block; width:100%; height:100%; object-fit:cover; }
 
 .wh-encontrar { position:relative; isolation:isolate; display:flex; min-height:clamp(750px,75vw,950px); align-items:center; padding-block:clamp(115px,11vw,185px); overflow:hidden; background:#191615; color:#fff8f2; }
@@ -188,16 +188,20 @@
   .wh-produtos-intro p { grid-column:1; margin:0; }
   .wh-produtos-scene { min-height:0; }
   .wh-produtos-main { position:relative; height:min(145vw,590px); }
-  .wh-produtos-main img { object-position:32% center; }
+  .wh-produtos-main img { width:100%; object-fit:cover; object-position:32% center; }
   .wh-produtos-scene::after { display:none; }
-  .wh-produtos-overlay { position:relative; top:auto; bottom:auto; left:auto; right:auto; width:auto; max-width:none; padding:130px 20px 65px; background:#2b1e1b; }
+  .wh-produtos-overlay { position:relative; top:auto; bottom:auto; left:auto; right:auto; width:auto; max-width:none; padding:130px 20px 65px; background:#2b1e1b; color:#fff8f1; }
   .wh-produtos-overlay p { max-width:490px; font-size:clamp(54px,10vw,74px); }
-  .wh-produtos-detail { top:calc(min(145vw,590px) - 115px); right:20px; bottom:auto; width:150px; height:180px; border-width:7px; will-change:auto; }
+  .wh-produtos-overlay p em { color:#f0d8c4; }
+  .wh-produtos-detail { top:calc(min(145vw,590px) - 115px); right:20px; bottom:auto; width:160px; border-width:7px; will-change:auto; }
   .wh-encontrar { min-height:780px; align-items:end; padding-block:95px 70px; }
   .wh-encontrar-photo { inset:0; }
-  .wh-encontrar-photo img { object-position:center 30%; }
+  .wh-encontrar-photo img { position:absolute; top:-15%; height:115%; object-position:center top; }
   .wh-encontrar::before { background:linear-gradient(0deg,#191615f0,#19161566 54%,transparent 77%); }
   .wh-encontrar h2 { max-width:550px; font-size:clamp(62px,11vw,80px); }
+}
+@media (max-width:360px) {
+  .wh-encontrar-photo img { top:-25%; height:125%; }
 }
 @media (orientation:landscape) and (max-height:500px) {
   .wh-hero,.wh-hero-inner { height:max(350px,100vh); min-height:0; }
@@ -210,6 +214,10 @@
   .wh-hero-action { min-width:160px; min-height:36px; gap:14px; font-size:12px; }
   .wh-scroll-cue { display:none; }
   .wh-movimento { min-height:600px; }
+}
+@media (orientation:landscape) {
+  .wh-encontrar h2 { max-width:700px; font-size:clamp(28px,5vw,72px); letter-spacing:-.055em; }
+  .wh-encontrar h2 em { display:block; white-space:nowrap; }
 }
 @media (orientation:landscape) and (max-height:350px) {
   .wh-hero-inner { padding-bottom:32px; }

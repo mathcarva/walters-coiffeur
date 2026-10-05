@@ -26,7 +26,7 @@ export const demoProducts: Product[] = demoCatalogEntries.map((item, index) => (
   sku: null,
   sortOrder: index,
   metadata: { line: item.line, volume: item.volume, demoOnly: true, illustrativePrice: true, origin: item.origin, source: item.source },
-  images: [{ id: `demo-image-${item.id}`, productId: `demo-${item.id}`, url: item.image, altText: `Embalagem conceitual de ${item.name}`, sortOrder: 0, isPrimary: true, createdAt: date }],
+  images: [{ id: `demo-image-${item.id}`, productId: `demo-${item.id}`, url: item.image, altText: `Recriação da embalagem histórica de ${item.name} em fundo neutro`, sortOrder: 0, isPrimary: true, createdAt: date }],
   categoryId: item.line === 'Walter’s Professional' ? 'professional' : 'barbearia',
   categoryName: item.line,
   isPhysical: false,
@@ -37,7 +37,8 @@ export const demoProducts: Product[] = demoCatalogEntries.map((item, index) => (
 }))
 
 // The storefront's product-by-slug loader attaches these official SDK option
-// and variant shapes to each sample product. Prices and sizes are mock data.
+// and variant shapes to each sample product. Prices are mock data; option
+// values contain only the sizes documented in the archived brand material.
 export const demoVariants: Record<string, ProductVariantSet> = Object.fromEntries(demoCatalogEntries.map(item => {
   const productId = `demo-${item.id}`
   const base = item.sizes.find(size => size.label === item.volume)
